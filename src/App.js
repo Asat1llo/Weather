@@ -1,3 +1,7 @@
+import styled, {createGlobalStyle} from "styled-components";
+
+
+const GlobalStyle = createGlobalStyle`
 *,
 *::before,
 *::after {
@@ -34,3 +38,6 @@ button {
   margin: 0 auto;
   padding: 0 20px;
 }
+`
+
+export default GlobalStyle
