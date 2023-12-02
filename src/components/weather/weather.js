@@ -137,3 +137,6 @@ export const WeatherFormSubmit = styled.button`
  font-size:20px;
  border-radius:10px;
 `
+
+
+export const WeatherTitle = styled.h1``
