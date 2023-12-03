@@ -14,6 +14,7 @@ const Weather = () => {
     const [data, setData] = useState([])
     const [value, setValue] = useState()
     const [give, setGive] = useState("andijon")
+    const elRemove = useRef()
 
     const [loading, setLoading] = useState()
     const [hours, setHours] = useState()
@@ -22,8 +23,11 @@ const Weather = () => {
 
     useEffect(() => {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${give}&units=metric&appid=277e160f5af509c9f6e384d7cbe3501c`)
-            .then((res) => res.json())
+            .then((res) =>res.json())
             .then((data) => setData(data))
+            .then((res)=>{
+                elRemove.current.value = ""
+            })
     }, [give])
 
     console.log(data)
@@ -69,7 +73,7 @@ const Weather = () => {
                 </WeatherDiv>
 
                 <WeatherForm>
-                    <WeatherFormInput type="text" placeholder="type here" onChange={(e) => { setValue(e.target.value) }} />
+                    <WeatherFormInput type="text" placeholder="type here" ref={elRemove} onChange={(e) => { setValue(e.target.value) }} />
                     <WeatherFormSubmit onClick={(evt) => {
                         evt.preventDefault()
                         setGive(value)
