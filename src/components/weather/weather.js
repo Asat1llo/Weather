@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const WeatherBox = styled.div`
 width:100%;
 height:100vh;
@@ -21,7 +22,7 @@ export const WeatherDiv = styled.div`
  padding-left:54px;
  padding-right:52px;
  border-radius: 20px;
-background: #C9E5FF;
+background:${({hours})=>hours?"#1F2E54" :"#C9E5FF"};
 box-shadow: 0px 34px 101px 0px rgba(9, 0, 63, 0.38);
 `
 
@@ -48,7 +49,7 @@ gap:5px;
 font-family: Plus Jakarta Sans;
 font-size: 64px;
 font-style: normal;
-color:#296399;
+color:${({hours})=>hours? "#8497C9" :"#296399"};
 font-weight: 700;
 line-height: normal;
 text-transform: capitalize;
