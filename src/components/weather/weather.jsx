@@ -25,28 +25,24 @@ const Weather = () => {
             .then((res) => {
                 elRemove.current.value = ""
             })
-    }, [give])
+    }, [give,transform])
 
 
     const date = new Date().getHours()
+    // const date =  6
 
     useEffect(() => {
         if (date >= 19) {
-            setTransform(true)
             setBg("#1F2E54")
             setImg(moon)
-        }
-
-    }, [])
-
-    useEffect(() => {
-        if (date <= 6) {
             setTransform(true)
-            // setBg("#C9E5FF")
-            setImg(weather4)
+        }
+        else if(date >= 6){
+            setTransform(true)
+            setBg("#C9E5FF")
+            console.log("19");
         }
     }, [])
-
 
     return (
         <section>
