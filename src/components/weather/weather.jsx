@@ -14,8 +14,9 @@ const Weather = () => {
     const [value, setValue] = useState()
     const [give, setGive] = useState("andijon")
     const elRemove = useRef()
-    const [hours, setHours] = useState(false)
+    const [bg, setBg] = useState("#C9E5FF")
     const [img, setImg] = useState(weather4)
+    const [transform, setTransform] = useState(false)
 
     useEffect(() => {
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${give}&units=metric&appid=277e160f5af509c9f6e384d7cbe3501c`)
@@ -29,42 +30,33 @@ const Weather = () => {
 
     const date = new Date().getHours()
 
-    console.log(date);
-
-
     useEffect(() => {
-        if ( date >= 19) {
-            setHours(true)
+        if (date >= 19) {
+            setTransform(true)
+            setBg("#1F2E54")
             setImg(moon)
-        }
-        else {
-            setHours(false)
-            setImg(weather4)
         }
 
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (date <= 6) {
-            setHours(true)
+            setTransform(true)
+            // setBg("#C9E5FF")
             setImg(weather4)
         }
-        else{
-            console.log("error");
-        }
-    },[])
-
+    }, [])
 
 
     return (
         <section>
             <WeatherBox>
                 <WeatherTitle>{data?.name}</WeatherTitle>
-                <WeatherDiv hours={hours}>
+                <WeatherDiv bg={bg}>
                     <WeatherGradusBox>
-                        <WeatherImg src={img} />
+                        <WeatherImg src={img} transform={transform} />
                         <WeatherGradusDesc>
-                            <WeatherGradusNumber hours={hours}>{data?.main?.humidity}<WeatherRoll /></WeatherGradusNumber>
+                            <WeatherGradusNumber>{data?.main?.humidity}<WeatherRoll /></WeatherGradusNumber>
                             <WeatherGradusText>sunny</WeatherGradusText>
                         </WeatherGradusDesc>
                     </WeatherGradusBox>
