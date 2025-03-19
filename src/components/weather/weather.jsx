@@ -25,22 +25,18 @@ const Weather = () => {
             .then((res) => {
                 elRemove.current.value = ""
             })
-    }, [give,transform])
-
-
-    const date = new Date().getHours()
-    // const date =  6
+    }, [give, transform])
 
     useEffect(() => {
-        if (date >= 19) {
+        const date = new Date().getHours()
+        if (date >= 19 || date < 6) {
             setBg("#1F2E54")
             setImg(moon)
             setTransform(true)
-        }
-        else if(date >= 6){
-            setTransform(true)
+        } else {
             setBg("#C9E5FF")
-            console.log("19");
+            setImg(weather4)
+            setTransform(false)
         }
     }, [])
 
@@ -52,8 +48,8 @@ const Weather = () => {
                     <WeatherGradusBox>
                         <WeatherImg src={img} transform={transform} />
                         <WeatherGradusDesc>
-                            <WeatherGradusNumber>{data?.main?.humidity}<WeatherRoll /></WeatherGradusNumber>
-                            <WeatherGradusText>sunny</WeatherGradusText>
+                            <WeatherGradusNumber>{data?.main?.temp}°C<WeatherRoll /></WeatherGradusNumber>
+                            <WeatherGradusText>{data?.weather?.[0]?.description}</WeatherGradusText>
                         </WeatherGradusDesc>
                     </WeatherGradusBox>
                     <WeatherDescBox>
@@ -63,11 +59,11 @@ const Weather = () => {
                         </WeatherDescBoxItems>
                         <WeatherDescBoxItems>
                             <WeatherDescBoxItemsImg src={weather2} />
-                            <WeatherDescBoxItemsText>{data?.wind?.deg}%</WeatherDescBoxItemsText>
+                            <WeatherDescBoxItemsText>{data?.wind?.deg}°</WeatherDescBoxItemsText>
                         </WeatherDescBoxItems>
                         <WeatherDescBoxItems>
                             <WeatherDescBoxItemsImg src={weather3} />
-                            <WeatherDescBoxItemsText>{data?.wind?.gust}</WeatherDescBoxItemsText>
+                            <WeatherDescBoxItemsText>{data?.wind?.gust}km/h</WeatherDescBoxItemsText>
                         </WeatherDescBoxItems>
                     </WeatherDescBox>
                 </WeatherDiv>
@@ -77,7 +73,7 @@ const Weather = () => {
                     <WeatherFormSubmit onClick={(evt) => {
                         evt.preventDefault()
                         setGive(value)
-                    }}>Clikc</WeatherFormSubmit>
+                    }}>Click</WeatherFormSubmit>
                 </WeatherForm>
             </WeatherBox>
         </section>
